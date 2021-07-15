@@ -5,15 +5,20 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.MainController">
-   <center>
-      <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="1.0" />
-         </BorderPane.margin>
-      </TextArea>
-   </center>
-   <bottom>
-      <Button fx:id="toggleButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#connectionEvent" text="시작하기" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane xmlns="http://javafx.com/javafx/16"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.view.MainController">
+	<center>
+		<TextArea fx:id="textArea" prefHeight="200.0"
+			prefWidth="200.0" BorderPane.alignment="CENTER">
+			<BorderPane.margin>
+				<Insets bottom="1.0" />
+			</BorderPane.margin>
+		</TextArea>
+	</center>
+	<bottom>
+		<Button fx:id="toggleButton" maxWidth="1.7976931348623157E308"
+			mnemonicParsing="false" onAction="#connectionEvent" text="시작하기"
+			BorderPane.alignment="CENTER" />
+	</bottom>
 </BorderPane>
