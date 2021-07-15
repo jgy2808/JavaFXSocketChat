@@ -1,4 +1,4 @@
-package application;
+package application.view;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ public class Client {
 						System.out.println("[메시지 수신 성공] " + socket.getRemoteSocketAddress() + ": "
 								+ Thread.currentThread().getName());
 						String message = new String(buffer, 0, length, "UTF-8");
-						for (Client client : Main.clients) {
+						for (Client client : MainController.clients) {
 							client.send(message);
 						}
 					}
@@ -45,7 +45,7 @@ public class Client {
 				}
 			}
 		};
-		Main.threadPool.submit(thread);
+		MainController.threadPool.submit(thread);
 	}
 
 	// 클라이언트로부터 메시지를 전송하는 메소드입니다.
@@ -64,7 +64,7 @@ public class Client {
 					try {
 						System.out.println("[메시지 수신 오류] " + socket.getRemoteSocketAddress() + ": "
 								+ Thread.currentThread().getName());
-						Main.clients.remove(Client.this);
+						MainController.clients.remove(Client.this);
 						socket.close();
 					} catch (Exception e2) {
 						// TODO: handle exception
@@ -73,6 +73,6 @@ public class Client {
 				}
 			}
 		};
-		Main.threadPool.submit(thread);
+		MainController.threadPool.submit(thread);
 	}
 }
