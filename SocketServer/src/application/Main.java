@@ -9,19 +9,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	// »óÀ§ ·¹ÀÌ¾Æ¿ôÀ» ÃÊ±âÈ­ÇÑ´Ù.
+	// ìƒìœ„ ë ˆì´ì•„ì›ƒì„ ì´ˆê¸°í™”
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 
 	public void initRootLayout() {
 		try {
-			// fxml ÆÄÀÏ¿¡¼­ »óÀ§ ·¹ÀÌ¾Æ¿ôÀ» °¡Á®¿Â´Ù.
+			// FXML íŒŒì¼ì—ì„œ ìƒìœ„ ë ˆì´ì•„ì›ƒì„ ê°€ì ¸ì˜´
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Main.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
-			// »óÀ§ ·¹ÀÌ¾Æ¿ôÀ» Æ÷ÇÔÇÏ´Â sceneÀ» º¸¿©ÁØ´Ù.
+			// ìƒìœ„ ë ˆì´ì•„ì›ƒì„ í¬í•¨í•˜ëŠ” sceneì„ ë³´ì—¬ì¤Œ
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
@@ -31,12 +31,12 @@ public class Main extends Application {
 		}
 	}
 
-	// UI¸¦ »ı¼ºÇÏ°í, ½ÇÁúÀûÀ¸·Î ÇÁ·Î±×·¥À» µ¿ÀÛ½ÃÅ°´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	// UIë¥¼ ìƒì„±í•˜ê³ , ì‹¤ì§ˆì ìœ¼ë¡œ í”„ë¡œê·¸ë¨ì„ ë™ì‘ì‹œí‚¤ëŠ” ë©”ì†Œë“œ
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			this.primaryStage = primaryStage;
-			this.primaryStage.setTitle("Ã¤ÆÃ¼­¹ö");
+			this.primaryStage.setTitle("ì±„íŒ…ì„œë²„");
 			initRootLayout();
 		} catch (Exception e) {
 			e.printStackTrace();

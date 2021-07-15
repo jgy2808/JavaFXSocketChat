@@ -20,47 +20,47 @@ public class MainController {
 	@FXML
 	private Button toggleButton;
 
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	public MainController() {
 
 	}
 
-	// ÄÁÆ®·Ñ·¯ Å¬·¡½º ÃÊ±âÈ­. FXML ÆÄÀÏÀÌ ·ÎµåµÇ°í ³ª¼­ ÀÚµ¿À¸·Î È£Ãâ
+	// ì»¨íŠ¸ë¡¤ëŸ¬ í´ë˜ìŠ¤ ì´ˆê¸°í™”. FXML íŒŒì¼ì´ ë¡œë“œë˜ê³  ë‚˜ì„œ ìë™ìœ¼ë¡œ í˜¸ì¶œ
 	@FXML
 	private void initialize() {
 
 	}
 
-	// ¿©·¯°³ÀÇ ½º·¹µå¸¦ È¿À²ÀûÀ¸·Î °ü¸®ÇÏ±â À§ÇØ »ç¿ëÇÏ´Â ´ëÇ¥ÀûÀÎ ¶óÀÌºê·¯¸®
+	// ì—¬ëŸ¬ê°œì˜ ìŠ¤ë ˆë“œë¥¼ íš¨ìœ¨ì ìœ¼ë¡œ ê´€ë¦¬í•˜ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ëŒ€í‘œì ì¸ ë¼ì´ë¸ŒëŸ¬ë¦¬
 	public static ExecutorService threadPool;
 	public static Vector<Client> clients = new Vector<Client>();
 
 	ServerSocket serverSocket;
 
-	// ½ÃÀÛÇÏ±â ¹öÆ° ÀÌº¥Æ®
+	// ì‹œì‘í•˜ê¸° ë²„íŠ¼ ì´ë²¤íŠ¸
 	@FXML
 	private void connectionEvent() {
 		String IP = "127.0.0.1";
 		int port = 9000;
 
-		if (toggleButton.getText().equals("½ÃÀÛÇÏ±â")) {
+		if (toggleButton.getText().equals("ì‹œì‘í•˜ê¸°")) {
 			startServer(IP, port);
 			Platform.runLater(() -> {
-				String message = String.format("[¼­¹ö ½ÃÀÛ]\n", IP, port);
+				String message = String.format("[ì„œë²„ ì‹œì‘]\n", IP, port);
 				textArea.appendText(message);
-				toggleButton.setText("Á¾·áÇÏ±â");
+				toggleButton.setText("ì¢…ë£Œí•˜ê¸°");
 			});
 		} else {
 			stopServer();
 			Platform.runLater(() -> {
-				String message = String.format("[¼­¹ö Á¾·á]\n", IP, port);
+				String message = String.format("[ì„œë²„ ì¢…ë£Œ]\n", IP, port);
 				textArea.appendText(message);
-				toggleButton.setText("½ÃÀÛÇÏ±â");
+				toggleButton.setText("ì‹œì‘í•˜ê¸°");
 			});
 		}
 	}
 
-	// ¼­¹öÀÇ ÀÛµ¿À» ½ÇÇàÇÏ´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	// ì„œë²„ì˜ ì‘ë™ì„ ì‹¤í–‰í•˜ëŠ” ë©”ì†Œë“œ
 	public void startServer(String IP, int port) {
 		try {
 			serverSocket = new ServerSocket();
@@ -73,7 +73,7 @@ public class MainController {
 			return;
 		}
 
-		// Å¬¶óÀÌ¾ğÆ®°¡ Á¢¼ÓÇÒ‹š±îÁö °è¼Ó ±â´Ù¸®´Â ½º·¹µå
+		// í´ë¼ì´ì–¸íŠ¸ê°€ ì ‘ì†í• ë•Œê¹Œì§€ ê³„ì† ê¸°ë‹¤ë¦¬ëŠ” ìŠ¤ë ˆë“œ
 		Runnable thread = new Runnable() {
 
 			@Override
@@ -83,7 +83,7 @@ public class MainController {
 					try {
 						Socket socket = serverSocket.accept();
 						clients.add(new Client(socket));
-						System.out.println("[Å¬¶óÀÌ¾ğÆ® Á¢¼Ó] " + socket.getRemoteSocketAddress() + ": "
+						System.out.println("[í´ë¼ì´ì–¸íŠ¸ ì ‘ì†] " + socket.getRemoteSocketAddress() + ": "
 								+ Thread.currentThread().getName());
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -99,17 +99,17 @@ public class MainController {
 		threadPool.submit(thread);
 	}
 
-	// ¼­¹öÀÇ ÀÛµ¿À» ÁßÁö½ÃÅ°´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	// ì„œë²„ì˜ ì‘ë™ì„ ì¤‘ì§€ì‹œí‚¤ëŠ” ë©”ì†Œë“œ
 	public void stopServer() {
 		try {
-			// ÇöÀç ÀÛµ¿ ÁßÀÎ ¸ğµç ¼ÒÄÏ ´İ±â
+			// í˜„ì¬ ì‘ë™ ì¤‘ì¸ ëª¨ë“  ì†Œì¼“ ë‹«ê¸°
 			Iterator<Client> iterator = clients.iterator();
 			while (iterator.hasNext()) {
 				Client client = iterator.next();
 				client.socket.close();
 				iterator.remove();
 			}
-			// ¼­¹ö ¼ÒÄÏ °´Ã¼ ´İ±â
+			// ì„œë²„ ì†Œì¼“ ê°ì²´ ë‹«ê¸°
 			if (serverSocket != null && !serverSocket.isClosed()) {
 				serverSocket.close();
 			}
