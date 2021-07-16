@@ -17,7 +17,7 @@
                <children>
                   <HBox prefWidth="400.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="userName" disable="true" editable="false" prefWidth="150.0" promptText="닉네임을 입력하세요" />
+                        <TextField fx:id="userName" editable="false" prefWidth="150.0" promptText="닉네임을 입력하세요" />
                         <TextField fx:id="IPText" disable="true" text="127.0.0.1" />
                         <TextField fx:id="portText" disable="true" editable="false" prefWidth="80.0" text="9000" />
                      </children>

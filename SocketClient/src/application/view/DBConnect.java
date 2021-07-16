@@ -90,6 +90,39 @@ public class DBConnect {
 		}
 
 	}
+	
+	public String getNick(String email) {
+		String nick = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select nick from user where email=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				nick = rs.getString(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		try {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+
+			if (rs != null) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nick;
+	}
 
 	public void close() {
 		try {

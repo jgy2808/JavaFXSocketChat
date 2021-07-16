@@ -3,6 +3,7 @@ package application.view;
 import java.util.HashMap;
 
 import application.Main;
+import application.model.UserVO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -17,6 +18,8 @@ public class LoginController {
 	DBConnect connector = new DBConnect();
 	Main scene = new Main();
 
+	UserVO uservo = new UserVO();
+	
 	@FXML
 	private TextField emailText;
 
@@ -41,6 +44,7 @@ public class LoginController {
 		connector.connect();
 		String email = emailText.getText();
 		String passwd = pwText.getText();
+		uservo.setEmail(email);
 		result = connector.login(email, passwd);
 		switch (result) {
 		case 1:
@@ -68,6 +72,10 @@ public class LoginController {
 	private void registerEvent() {
 		Stage stage = (Stage) registerBtn.getScene().getWindow();
 		scene.registerScene(stage);
+	}
+	
+	public UserVO getUserVO() {
+		return uservo;
 	}
 
 	// 서버 선택 이벤트

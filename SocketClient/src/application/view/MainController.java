@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import application.model.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +13,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class MainController {
+	DBConnect connector = new DBConnect();
 	Socket socket;
+	
+	LoginController uservo = new LoginController();
+	UserVO userInfo = new UserVO();
 	
 	@FXML
 	private Button connectionButton;
@@ -29,10 +34,12 @@ public class MainController {
 	@FXML
 	private TextArea textArea;
 	
+	
 	// 접속하기 클릭 시 작동하는 코드
 	@FXML
 	private void connection() {
 		if (connectionButton.getText().equals("접속하기")) {
+			setUserName();
 			int port = 9000;
 			try {
 				port = Integer.parseInt(portText.getText());
@@ -60,13 +67,19 @@ public class MainController {
 		}
 	}
 	
-	// 채팅 입력창에 채팅 입력 시 작동하는 코드
-//	@FXML
-//	private void textInput() {
-//		send(userName.getText() + ": " + input.getText() + "\n");
-//		input.setText("");
-//		input.requestFocus();
-//	}
+	private void setUserName() {
+		userInfo = uservo.getUserVO();
+		String email = userInfo.getEmail();
+		System.out.println(email);
+		userName.setEditable(true);
+		connector.connect();
+		String nickname = connector.getNick(email);
+		System.out.println(nickname);
+		userName.setText(nickname);
+		userName.setEditable(false);
+		userName.setDisable(true);
+		connector.close();	
+	}
 	
 	// 보내기 버튼 클릭 시 작동하는 코드
 	@FXML
