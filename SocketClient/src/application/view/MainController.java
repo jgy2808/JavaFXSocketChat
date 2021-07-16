@@ -44,9 +44,10 @@ public class MainController {
 			Platform.runLater(() -> {
 				textArea.appendText("[채팅방 접속]\n");
 			});
-			connectionButton.setText("종료하기");
+			connectionButton.setText("종료");
 			input.setDisable(false);
 			sendButton.setDisable(false);
+			textArea.setDisable(false);
 			input.requestFocus();
 		} else {
 			stopClient();
@@ -60,12 +61,12 @@ public class MainController {
 	}
 	
 	// 채팅 입력창에 채팅 입력 시 작동하는 코드
-	@FXML
-	private void textInput() {
-		send(userName.getText() + ": " + input.getText() + "\n");
-		input.setText("");
-		input.requestFocus();
-	}
+//	@FXML
+//	private void textInput() {
+//		send(userName.getText() + ": " + input.getText() + "\n");
+//		input.setText("");
+//		input.requestFocus();
+//	}
 	
 	// 보내기 버튼 클릭 시 작동하는 코드
 	@FXML

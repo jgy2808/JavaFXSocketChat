@@ -25,7 +25,7 @@ public class DBConnect {
 	}
 
 	// 회원 로그인을 검사하는 메서드
-	public void login(String email, String pw) {
+	public int login(String email, String pw) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * from user where email=?";
@@ -37,14 +37,20 @@ public class DBConnect {
 
 			if (rs.next()) {
 
-				if (pw.equals(rs.getString(2))) {
+				if (pw.equals(rs.getString(3))) {
 					// 이메일, 비밀번호 일치
+					System.out.println("로그인 성공");
+					return 1;
 				} else {
 					// 이메일 일치, 비밀번호 틀림
+					System.out.println("로그인 실패");
+					return 2;
 				}
 
 			} else {
 				// 없는 계정
+				System.out.println("없는 이메일");
+				return 3;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -62,18 +68,21 @@ public class DBConnect {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return 0;
 
 	}
 
 	// 회원 정보를 등록하는 메서드
-	public void register(String email, String pw) {
+	public void register(String email, String nick, String pw) {
 		PreparedStatement pstmt = null;
-		String sql = "insert into user values(?, ?)";
+		String sql = "insert into user values(?, ?, ?)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
-			pstmt.setString(2, pw);
+			pstmt.setString(2, nick);
+			pstmt.setString(3, pw);
+			
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -91,4 +100,5 @@ public class DBConnect {
 			e.printStackTrace();
 		}
 	}
+	
 }
