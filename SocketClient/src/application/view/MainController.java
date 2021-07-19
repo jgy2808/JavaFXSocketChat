@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.model.UserVO;
+import application.util.DBConnect;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,10 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class MainController implements Initializable{
+public class MainController implements Initializable {
 	DBConnect connector = new DBConnect();
 	Socket socket;
-	
+
 	@FXML
 	private Button connectionButton;
 	@FXML
@@ -33,7 +33,7 @@ public class MainController implements Initializable{
 	private TextField userName;
 	@FXML
 	private TextArea textArea;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -44,9 +44,8 @@ public class MainController implements Initializable{
 		portText.setText(LoginController.port);
 		connector.close();
 	}
-	
-	
-	// 접속하기 클릭 시 작동하는 코드
+
+	// 접속하기 클릭 시 작동하는 함수
 	@FXML
 	private void connection() {
 		if (connectionButton.getText().equals("접속하기")) {
@@ -76,16 +75,16 @@ public class MainController implements Initializable{
 			sendButton.setDisable(true);
 		}
 	}
-	
-	// 보내기 버튼 클릭 시 작동하는 코드
+
+	// 보내기 버튼 클릭 시 작동하는 함수
 	@FXML
 	private void sndBtnClick() {
-		send(userName.getText() + ": " + input.getText() + "\n");
+		send(userName.getText() + ">" + input.getText() + "\n");
 		input.setText("");
 		input.requestFocus();
 	}
-	
-	// 클라이언트 시작
+
+	// 클라이언트 시작 함수
 	private void startClient(String IP, int port) {
 		Thread thread = new Thread() {
 			public void run() {
@@ -104,8 +103,8 @@ public class MainController implements Initializable{
 		};
 		thread.start();
 	}
-	
-	// 클라이언트 종료
+
+	// 클라이언트 종료 함수
 	private void stopClient() {
 		try {
 			if (socket != null && !socket.isClosed()) {
@@ -117,7 +116,7 @@ public class MainController implements Initializable{
 		}
 	}
 
-	// 채팅 받는 코드
+	// 채팅 받는 함수
 	public void receive() {
 		while (true) {
 			try {
@@ -137,8 +136,8 @@ public class MainController implements Initializable{
 			}
 		}
 	}
-	
-	// 채팅 보내는 코드
+
+	// 채팅 보내는 함수
 	public void send(String message) {
 		Thread thread = new Thread() {
 			public void run() {
@@ -155,5 +154,5 @@ public class MainController implements Initializable{
 		};
 		thread.start();
 	}
-	
+
 }

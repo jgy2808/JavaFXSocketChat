@@ -3,6 +3,7 @@ package application.view;
 import java.util.HashMap;
 
 import application.Main;
+import application.util.DBConnect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,14 +13,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController{
+public class LoginController {
 	HashMap<String, Integer> serverConn = new HashMap<String, Integer>();
 	static String email = null;
 	static String IP = null;
 	static String port;
 	DBConnect connector = new DBConnect();
 	Main scene = new Main();
-	
+
 	@FXML
 	private TextField emailText;
 
@@ -34,7 +35,6 @@ public class LoginController{
 
 	@FXML
 	private Button registerBtn;
-	
 
 	// 로그인 이벤트
 	@FXML
@@ -73,7 +73,6 @@ public class LoginController{
 		Stage stage = (Stage) registerBtn.getScene().getWindow();
 		scene.registerScene(stage);
 	}
-	
 
 	// 서버 선택 이벤트
 	@FXML
