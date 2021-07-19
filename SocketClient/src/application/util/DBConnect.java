@@ -28,7 +28,7 @@ public class DBConnect {
 	public int login(String email, String pw) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from user where email=?";
+		String sql = "select AES_DECRYPT(UNHEX(pw), 'key') from user where email=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class DBConnect {
 
 			if (rs.next()) {
 
-				if (pw.equals(rs.getString(3))) {
+				if (pw.equals(rs.getString(1))) {
 					// 이메일, 비밀번호 일치
 					System.out.println("로그인 성공");
 					return 1;
@@ -75,14 +75,13 @@ public class DBConnect {
 	// 회원 정보를 등록하는 메서드
 	public void register(String email, String nick, String pw) {
 		PreparedStatement pstmt = null;
-		String sql = "insert into user values(?, ?, ?)";
-
+		String encryptPasswd = String.format("HEX(AES_ENCRYPT('%s', 'key'))", pw);
+		System.out.println(encryptPasswd);
+		String sql = "insert into user values(?, ?, " + encryptPasswd + ")";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, nick);
-			pstmt.setString(3, pw);
-			
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -90,7 +89,7 @@ public class DBConnect {
 		}
 
 	}
-	
+
 	public String getNick(String email) {
 		String nick = null;
 		PreparedStatement pstmt = null;
@@ -133,5 +132,5 @@ public class DBConnect {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
