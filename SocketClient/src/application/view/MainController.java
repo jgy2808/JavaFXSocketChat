@@ -4,20 +4,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import application.model.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class MainController {
+public class MainController implements Initializable{
 	DBConnect connector = new DBConnect();
 	Socket socket;
-	
-	LoginController uservo = new LoginController();
-	UserVO userInfo = new UserVO();
 	
 	@FXML
 	private Button connectionButton;
@@ -34,13 +34,23 @@ public class MainController {
 	@FXML
 	private TextArea textArea;
 	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		connector.connect();
+		String nick = connector.getNick(LoginController.email);
+		userName.setText(nick);
+		IPText.setText(LoginController.IP);
+		portText.setText(LoginController.port);
+		connector.close();
+	}
+	
 	
 	// 접속하기 클릭 시 작동하는 코드
 	@FXML
 	private void connection() {
 		if (connectionButton.getText().equals("접속하기")) {
-			setUserName();
-			int port = 9000;
+			int port = 0;
 			try {
 				port = Integer.parseInt(portText.getText());
 			} catch (Exception e) {
@@ -65,20 +75,6 @@ public class MainController {
 			input.setDisable(true);
 			sendButton.setDisable(true);
 		}
-	}
-	
-	private void setUserName() {
-		userInfo = uservo.getUserVO();
-		String email = userInfo.getEmail();
-		System.out.println(email);
-		userName.setEditable(true);
-		connector.connect();
-		String nickname = connector.getNick(email);
-		System.out.println(nickname);
-		userName.setText(nickname);
-		userName.setEditable(false);
-		userName.setDisable(true);
-		connector.close();	
 	}
 	
 	// 보내기 버튼 클릭 시 작동하는 코드

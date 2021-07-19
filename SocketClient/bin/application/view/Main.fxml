@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.MainController">
    <children>
       <VBox prefHeight="400.0" prefWidth="400.0">
          <children>
@@ -17,9 +17,9 @@
                <children>
                   <HBox prefWidth="400.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="userName" editable="false" prefWidth="150.0" promptText="닉네임을 입력하세요" />
-                        <TextField fx:id="IPText" disable="true" text="127.0.0.1" />
-                        <TextField fx:id="portText" disable="true" editable="false" prefWidth="80.0" text="9000" />
+                        <TextField fx:id="userName" editable="false" focusTraversable="false" prefWidth="150.0" />
+                        <TextField fx:id="IPText" editable="false" focusTraversable="false" />
+                        <TextField fx:id="portText" editable="false" focusTraversable="false" prefWidth="80.0" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="10.0" top="5.0" />

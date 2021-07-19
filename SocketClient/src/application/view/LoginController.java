@@ -1,10 +1,14 @@
 package application.view;
 
+import java.net.URL;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import application.Main;
-import application.model.UserVO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -13,12 +17,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController implements Initializable{
 	HashMap<String, Integer> serverConn = new HashMap<String, Integer>();
+	static String email = null;
+	static String IP = null;
+	static String port;
 	DBConnect connector = new DBConnect();
 	Main scene = new Main();
-
-	UserVO uservo = new UserVO();
 	
 	@FXML
 	private TextField emailText;
@@ -34,6 +39,14 @@ public class LoginController {
 
 	@FXML
 	private Button registerBtn;
+	
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		ObservableList<String> list = FXCollections.observableArrayList("127.0.0.1:9000");
+		serverList.setItems(list);
+	}
 
 	// 로그인 이벤트
 	@FXML
@@ -42,9 +55,8 @@ public class LoginController {
 		Stage stage = (Stage) loginBtn.getScene().getWindow();
 		Alert alert;
 		connector.connect();
-		String email = emailText.getText();
+		email = emailText.getText();
 		String passwd = pwText.getText();
-		uservo.setEmail(email);
 		result = connector.login(email, passwd);
 		switch (result) {
 		case 1:
@@ -74,17 +86,14 @@ public class LoginController {
 		scene.registerScene(stage);
 	}
 	
-	public UserVO getUserVO() {
-		return uservo;
-	}
 
 	// 서버 선택 이벤트
 	@FXML
 	private void serverChoiceEvent() {
 		String server = serverList.getValue();
 
-		String IP = server.split(":")[0];
-		int port = Integer.parseInt(server.split(":")[1]);
+		IP = server.split(":")[0];
+		port = server.split(":")[1];
 	}
 
 }
