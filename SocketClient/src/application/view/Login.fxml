@@ -46,7 +46,7 @@
 								<TextField fx:id="emailText" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
 								<PasswordField fx:id="pwText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 								<Label text="Server" GridPane.rowIndex="2" />
-								<ComboBox fx:id="serverList" maxWidth="1.7976931348623157E308" onAction="#serverChoiceEvent" prefWidth="150.0" promptText="IP : PORT 선택" GridPane.columnIndex="1" GridPane.rowIndex="2">
+								<ComboBox fx:id="serverList" editable="true" maxWidth="1.7976931348623157E308" onAction="#serverChoiceEvent" prefWidth="150.0" promptText="IP : PORT 선택" GridPane.columnIndex="1" GridPane.rowIndex="2">
 									<items>
 										<FXCollections fx:factory="observableArrayList">
 											<String fx:value="127.0.0.1:9000" />
