@@ -1,4 +1,4 @@
-package application.view;
+package application.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class DBConnect {
 
 	public void connect() {
 		String url = "jdbc:mysql://monfj0054yp8v8db:l9bbbpdrplbort86@ohunm00fjsjs1uzy.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/u1ugaz603cqfne9g";
-		String user = "	monfj0054yp8v8db";
+		String user = "monfj0054yp8v8db";
 		String password = "l9bbbpdrplbort86";
 		String driver = "com.mysql.cj.jdbc.Driver";
 
