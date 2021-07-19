@@ -1,6 +1,7 @@
 package application.view;
 
 import application.Main;
+import application.util.DBConnect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
