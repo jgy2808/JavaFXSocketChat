@@ -1,14 +1,9 @@
 package application.view;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 import application.Main;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -17,7 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController implements Initializable{
+public class LoginController{
 	HashMap<String, Integer> serverConn = new HashMap<String, Integer>();
 	static String email = null;
 	static String IP = null;
@@ -40,13 +35,6 @@ public class LoginController implements Initializable{
 	@FXML
 	private Button registerBtn;
 	
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		ObservableList<String> list = FXCollections.observableArrayList("127.0.0.1:9000");
-		serverList.setItems(list);
-	}
 
 	// 로그인 이벤트
 	@FXML
