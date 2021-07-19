@@ -14,10 +14,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginController {
-	HashMap<String, Integer> serverConn = new HashMap<String, Integer>();
+	@SuppressWarnings("serial")
+	HashMap<String, String> serverConn = new HashMap<String, String>(){{ 
+		put("server1","192.168.168.40:9000");
+		put("server2","192.168.168.36:9000");
+	}};
 	static String email = null;
 	static String IP = null;
-	static String port;
+	static String port = null;
 	DBConnect connector = new DBConnect();
 	Main scene = new Main();
 
@@ -78,10 +82,11 @@ public class LoginController {
 	@FXML
 	private void serverChoiceEvent() {
 		String server = serverList.getValue();
-		// isEmpty 참-> 0 출력
-		if (server.isEmpty()) {
-			IP = server.split(":")[0];
-			port = server.split(":")[1];
+		if (!server.isBlank()) {
+			IP = (serverConn.get(server)).split(":")[0];
+			port = (serverConn.get(server)).split(":")[1];
+//			IP = server.split(":")[0];
+//			port = server.split(":")[1];
 		}
 
 	}

@@ -49,7 +49,8 @@
 								<ComboBox fx:id="serverList" editable="true" maxWidth="1.7976931348623157E308" onAction="#serverChoiceEvent" prefWidth="150.0" promptText="IP : PORT 선택" GridPane.columnIndex="1" GridPane.rowIndex="2">
 									<items>
 										<FXCollections fx:factory="observableArrayList">
-											<String fx:value="127.0.0.1:9000" />
+											<String fx:value="server1" />
+											<String fx:value="server2" />
 										</FXCollections>
 									</items>
 								</ComboBox>
