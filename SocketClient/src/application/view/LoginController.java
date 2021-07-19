@@ -78,9 +78,12 @@ public class LoginController {
 	@FXML
 	private void serverChoiceEvent() {
 		String server = serverList.getValue();
+		// isEmpty 참-> 0 출력
+		if (server.isEmpty()) {
+			IP = server.split(":")[0];
+			port = server.split(":")[1];
+		}
 
-		IP = server.split(":")[0];
-		port = server.split(":")[1];
 	}
 
 }
