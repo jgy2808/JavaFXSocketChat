@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class MainController implements Initializable {
 	DBConnect connector = new DBConnect();
@@ -82,6 +84,16 @@ public class MainController implements Initializable {
 		send(userName.getText() + ">" + input.getText() + "\n");
 		input.setText("");
 		input.requestFocus();
+	}
+	
+	// 엔터키를 눌렀을 때 채팅을 보내는 함수
+	@FXML
+	private void enterKeyEvent(KeyEvent event) {
+		if(event.getCode() == KeyCode.ENTER) {
+			send(userName.getText() + ">" + input.getText() + "\n");
+			input.setText("");
+			input.requestFocus();
+		}
 	}
 
 	// 클라이언트 시작 함수

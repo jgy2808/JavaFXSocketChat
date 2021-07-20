@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class LoginController {
 	@SuppressWarnings("serial")
 	HashMap<String, String> serverConn = new HashMap<String, String>(){{ 
-		put("server1","192.168.168.40:9000");
+		put("server1","127.0.0.1:9000");
 		put("server2","192.168.168.36:9000");
 	}};
 	static String email = null;
