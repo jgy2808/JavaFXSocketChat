@@ -1,8 +1,10 @@
 package application.view;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
@@ -39,8 +41,9 @@ public class MainController {
 
 	// 시작하기 버튼 이벤트
 	@FXML
-	private void connectionEvent() {
-		String IP = "127.0.0.1";
+	private void connectionEvent() throws UnknownHostException {
+		// 자신의 IP 출력
+		String IP = InetAddress.getLocalHost().getHostAddress().toString();
 		int port = 9000;
 
 		if (toggleButton.getText().equals("시작하기")) {
